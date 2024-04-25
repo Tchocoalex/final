@@ -8,18 +8,18 @@ class ZooTicketBookingApp:
     def __init__(self, master):
         self.master = master
         master.title("Zoo Ticket Booking System")
-        master.geometry("900x900")
+        master.geometry("1300x1300")
         master.configure(background='#ffcc66')
 
        
         # Create a database connection and cursor
-        self.conn = sqlite3.connect("zoo_tickets.db")
+        self.conn = sqlite3.connect("bookings.db")
         self.cursor = self.conn.cursor()
 
         # Create a table if it doesn't exist
         self.cursor.execute(
             '''CREATE TABLE IF NOT EXISTS bookings 
-               (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ticket_type TEXT, quantity INTEGER)'''
+               (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, ticket_type TEXT, quantity INTEGER)'''
         )
         self.conn.commit()
 
@@ -36,7 +36,7 @@ class ZooTicketBookingApp:
         self.content_frame.pack(pady=20)
 
         # Create labels and entry widgets for ticket booking
-        self.name_label = tk.Label(self.content_frame, text="Name:")
+        self.name_label = tk.Label(self.content_frame, text="Email:")
         self.name_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
         self.name_entry = tk.Entry(self.content_frame)
         self.name_entry.grid(row=0, column=1, padx=10, pady=5)
@@ -57,10 +57,10 @@ class ZooTicketBookingApp:
         self.book_button = tk.Button(self.content_frame, text="Book Tickets", command=self.book_tickets)
         self.book_button.grid(row=3, columnspan=2, pady=10)
 
-        image = Image.open("images/jungle.jpg")
+        image = Image.open("images/zoo activities.jpg")
 
          # Resize the image to fit the size of the page
-        image = image.resize((600, 400), Image.ANTIALIAS)  # Replace (800, 600) with the size of your page
+        image = image.resize((600, 400), Image.LANCZOS)  # Replace (800, 600) with the size of your page
 
          # Convert the image to a Tkinter-compatible photo image
         self.image = ImageTk.PhotoImage(image)
@@ -84,17 +84,17 @@ class ZooTicketBookingApp:
         self.footer_label.pack(pady=10)
 
     def book_tickets(self):
-        name = self.name_entry.get()
+        email = self.email_entry.get()
         ticket_type = self.ticket_type_var.get()
         quantity = int(self.quantity_spinbox.get())
 
-        if name and quantity > 0:
+        if email and quantity > 0:
             # Insert the booking into the database
-            self.cursor.execute("INSERT INTO bookings (name, ticket_type, quantity) VALUES (?, ?, ?)",
-                                (name, ticket_type, quantity))
+            self.cursor.execute("INSERT INTO bookings (email, ticket_type, quantity) VALUES (?, ?, ?)",
+                                (email, ticket_type, quantity))
             self.conn.commit()
 
-            booking_message = f"Tickets booked for {name} ({quantity} {ticket_type} tickets)!"
+            booking_message = f"Tickets booked for {email} ({quantity} {ticket_type} tickets)!"
             messagebox.showinfo("Booking Confirmation", booking_message)
         else:
             messagebox.showerror("Booking Error", "Please provide a valid name and quantity!")

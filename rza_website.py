@@ -95,7 +95,7 @@ class ZooApp:
         image = Image.open("images/girafe.jpg")
 
          # Resize the image to fit the size of the page
-        image = image.resize((800, 800), Image.ANTIALIAS)  # Replace (800, 600) with the size of your page
+        image = image.resize((800, 800), Image.LANCZOS)  # Replace (800, 600) with the size of your page
 
          # Convert the image to a Tkinter-compatible photo image
         self.image = ImageTk.PhotoImage(image)
@@ -141,7 +141,7 @@ class ZooApp:
     def show_tickets(self):
         # self.page_label.config(text="Welcome to the Tickets page!")
         self.master.destroy()
-        ticket_module = importlib.import_module('ticket')  # Import the login module
+        ticket_module = importlib.import_module('ticket')  # Import the ticket module
         root = tk.Tk()
         app = ticket_module.ZooTicketBookingApp(root)
         root.mainloop()

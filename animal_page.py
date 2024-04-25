@@ -16,7 +16,7 @@ class AnimalPage:
         logo = Image.open("images/zoo activities.jpg")  # Replace "logo.png" with the path to your logo image file
 
         # Resize the logo
-        logo = logo.resize((300, 300), Image.ANTIALIAS)  # Replace (100, 100) with the size you want
+        logo = logo.resize((300, 300), Image.LANCZOS)  # Replace (100, 100) with the size you want
 
         # Convert the logo to a Tkinter-compatible photo image
         tk_logo = ImageTk.PhotoImage(logo)
@@ -72,7 +72,7 @@ class AnimalPage:
         # Load the image 
         img = Image.open(animal.image_path)
         # Resize the image
-        img = img.resize((400, 500), Image.ANTIALIAS)
+        img = img.resize((400, 500), Image.LANCZOS)
         # Convert the image to a Tkinter-compatible photo image  
         tk_img = ImageTk.PhotoImage(img)
         # Create a label with the image
@@ -81,14 +81,12 @@ class AnimalPage:
         label.pack()
 
     def go_back(self):
-        # Hide the AnimalPage
-        for widget in self.master.winfo_children():
-            widget.pack_forget()
+        # Destroy the current window
+        self.master.destroy()
 
-        # Show the main page
-        if self.zoo_app is not None:
-            self.zoo_app.show_main_page()
-
+        from rza_website import ZooApp# Create a new instance of the main page
+        main_page = ZooApp(tk.Tk())
+        
 class Animal:
     def __init__(self, animal_id):
         # Connect to the SQLite database

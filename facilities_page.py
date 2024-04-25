@@ -3,7 +3,8 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import sqlite3
 from tkinter import messagebox
-from rza_website import ZooApp
+
+
 
 class ZooInfoPage:
     def __init__(self, master):
@@ -17,7 +18,7 @@ class ZooInfoPage:
 
         
         # Load the map image
-        img = Image.open("images\safari map.jpeg")
+        img = Image.open("images/safari map.jpeg")
         photo_img = ImageTk.PhotoImage(img)
 
         # Create a canvas for the map
@@ -73,7 +74,7 @@ class ZooInfoPage:
         # Destroy the current window
         self.master.destroy()
 
-        # Create a new instance of the main page
+        from rza_website import ZooApp# Create a new instance of the main page
         main_page = ZooApp(tk.Tk())
        
 

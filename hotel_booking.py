@@ -6,7 +6,7 @@ from tkcalendar import DateEntry
 from tkinter import ttk
 from PIL import ImageTk, Image 
 from login import LoginPage
-from rza_website import ZooApp
+# from rza_website import ZooApp
 
 # Set up logging
 logging.basicConfig(filename='hotel_booking.log', level=logging.DEBUG)
@@ -76,7 +76,7 @@ class HotelBookingForm:
         image = Image.open("images/suite.jpg")
 
          # Resize the image to fit the size of the page
-        image = image.resize((600, 400), Image.ANTIALIAS)  # Replace (800, 600) with the size of your page
+        image = image.resize((600, 400), Image.LANCZOS)  # Replace (800, 600) with the size of your page
 
          # Convert the image to a Tkinter-compatible photo image
         self.image = ImageTk.PhotoImage(image)
@@ -103,9 +103,8 @@ class HotelBookingForm:
         # Destroy the current window
         self.master.destroy()
 
-        # Create a new instance of the main page
+        from rza_website import ZooApp# Create a new instance of the main page
         main_page = ZooApp(tk.Tk())
-        main_page.show_main_page()
 
     def initialize_database(self):
         """Initialize the database."""
@@ -175,6 +174,7 @@ class HotelBookingForm:
 
         messagebox.showinfo("Booking submitted", "Booking submitted successfully.")
         logging.info('Submitted booking')
+
     def display_bookings(self):
         """Display all bookings in a new window."""
         self.cursor.execute('SELECT * FROM bookings')
@@ -196,5 +196,5 @@ class HotelBookingForm:
 if __name__ == "__main__":
     root = tk.Tk()
     HotelBookingForm(root)
-    main_page = ZooApp(root)
+    
     root.mainloop()
