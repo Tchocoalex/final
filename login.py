@@ -15,16 +15,16 @@ class LoginPage:
         self.master = master
         self.master.title("Zoo App Login")
         self.master.geometry("1300x1300")
-        self.master.configure(background='#ffcc66')
+        self.master.configure(background='#77B0AA')
         
 
 
        
         # Load the image file
-        img = Image.open("images/desert.jpg")  # Replace with your image file path
+        img = Image.open("images/tiger.jpg")  # Replace with your image file path
 
         # Resize the image
-        img = img.resize((900, 900), Image.LANCZOS)  # Resize to match your window size
+        img = img.resize((1000, 900), Image.LANCZOS)  # Resize to match your window size
 
         # Convert the image to a Tkinter-compatible photo image
         bg = ImageTk.PhotoImage(img)
@@ -60,18 +60,18 @@ class LoginPage:
         self.sign_in_button = tk.Button(master, text="Sign In", command=self.show_sign_up)
         self.sign_in_button.pack(pady=10)
 
-         # Load the image
-        image = Image.open("images/desert.jpg")
+        #  # Load the image
+        # image = Image.open("images/desert.jpg")
 
-         # Resize the image to fit the size of the page
-        image = image.resize((800, 600), Image.ANTIALIAS)  # Replace (800, 600) with the size of your page
+        #  # Resize the image to fit the size of the page
+        # image = image.resize((800, 600), Image.LANCZOS)  # Replace (800, 600) with the size of your page
 
-         # Convert the image to a Tkinter-compatible photo image
-        self.image = ImageTk.PhotoImage(image)
+        #  # Convert the image to a Tkinter-compatible photo image
+        # self.image = ImageTk.PhotoImage(image)
         
-        # Create a label with the image
-        self.image_label = tk.Label(master, image=self.image)
-        self.image_label.pack()
+        # # Create a label with the image
+        # self.image_label = tk.Label(master, image=self.image)
+        # self.image_label.pack()
 
 
         self.page_frame = tk.Frame(master)
