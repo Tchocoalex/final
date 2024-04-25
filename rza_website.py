@@ -6,22 +6,7 @@ import re
 from PIL import ImageTk , Image
 import importlib
 
-# from animal_page import AnimalPage
-# from hotel_booking import HotelBookingForm
-# from sign_up_page import SignInPage 
-# from ticket import ZooTicketBookingApp
-# from login import LoginPage, LogoutPage
-# importlib.import_module('login')
-# importlib.import_module('animal_page')
-# importlib.import_module('ticket')
 
-
-
-
-
-
-
-        
 
 
 
@@ -51,14 +36,20 @@ class BookingInfoPage:
 class ZooApp:
     def __init__(self, master):
         self.master = master
-        master.title("Zoo App")
+        master.title("RZA Website")
         master.geometry("1300x1300")
         master.configure(background='#ffcc66')
         master.resizable(width=False, height=False)
        
         
         
+        # Create a frame for the header
+        self.header_frame = tk.Frame(master, bg="#333")
+        self.header_frame.pack(fill=tk.X)
 
+        # Create header label
+        self.header_label = tk.Label(self.header_frame, text="Welcome to Ridget Zoo Adventure ", fg="white", bg="#333", font=("Helvetica", 20))
+        self.header_label.pack(pady=10)
         self.main_frame = tk.Frame(master)
         self.main_frame.label= tk.Label(self.main_frame, text="Welcome to the Zoo App", font=("Arial", 24))
         
@@ -100,30 +91,28 @@ class ZooApp:
          # Convert the image to a Tkinter-compatible photo image
         self.image = ImageTk.PhotoImage(image)
         
-        # Create a label with the image
-        self.image_label = tk.Label(master, image=self.image)
+        # Create an outer frame that expands to fill the window
+        outer_frame = tk.Frame(master)
+        outer_frame.pack(expand=True)
+
+        # Create an inner frame that doesn't expand
+        inner_frame = tk.Frame(outer_frame)
+        inner_frame.pack()
+
+        # Create a label with the image and add it to the inner frame
+        self.image_label = tk.Label(inner_frame, image=self.image)
         self.image_label.pack()
 
+        
 
-        self.page_frame = tk.Frame(master)
-        self.page_frame.pack()
 
-        self.page_label = tk.Label(self.page_frame, text="Welcome to the Zoo App")
-        self.page_label.pack()
+        # self.page_frame = tk.Frame(master)
+        # self.page_frame.pack()
 
-    # def show_main_page(self):
-    #     # Hide all other frames
-    #     for widget in self.master.winfo_children():
-    #         widget.pack_forget()
+        # self.page_label = tk.Label(self.page_frame, text="Welcome to the Ridget Zoo Adventure!")
+        # self.page_label.pack()
 
-    #     # Show the main frame and its buttons
-    #     self.main_frame.pack()
-    #     self.animals_button.pack(side="left")
-    #     self.tickets_button.pack(side="left")
-    #     self.contact_button.pack(side="left")
-    #     self.login_button.pack(side="left")
-    #     self.hotel_button.pack(side="left")
-
+    
     def show_animals(self):
         self.master.destroy()
         root = tk.Tk()
@@ -147,7 +136,12 @@ class ZooApp:
         root.mainloop()
 
     def show_contact(self):
-        self.page_label.config(text="Welcome to the Contact page!")
+        self.master.destroy()
+        contact_module = importlib.import_module("contact_page")
+        root = tk.Tk()
+        app = contact_module.ContactPage(root)
+        root.mainloop()
+        
 
     def show_login(self):
         self.master.destroy()  # Close the main window
@@ -167,8 +161,8 @@ class ZooApp:
         self.master.destroy()  # close the home page window
         root = tk.Tk()  # create a new root window
         app = ZooApp(root)  # open the logout page
-
         root.mainloop()
+
     def show_sign_up(self):
         self.master.destroy()
         app = SignInPage(root)

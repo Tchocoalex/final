@@ -73,7 +73,7 @@ class ZooTicketBookingApp:
         self.page_frame = tk.Frame(self.master)
         self.page_frame.pack()
 
-        self.page_label = tk.Label(self.page_frame, text="suite")
+        self.page_label = tk.Label(self.page_frame, text="Fun day at the Zoo")
         self.page_label.pack()
         # Create a frame for the footer
         self.footer_frame = tk.Frame(master, bg="#333")
